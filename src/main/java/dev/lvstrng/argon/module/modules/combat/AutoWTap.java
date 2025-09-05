@@ -56,6 +56,7 @@ public final class AutoWTap extends Module implements PacketSendListener, HudLis
 			holdingForward = false;
 			return;
 		}
+		if (mc.player == null) return;
 
 		if (!inAir.getValue() && !mc.player.isOnGround())
 			return;
@@ -92,6 +93,8 @@ public final class AutoWTap extends Module implements PacketSendListener, HudLis
 		if (!(event.packet instanceof PlayerInteractEntityC2SPacket packet))
 			return;
 
+
+
 		packet.handle(new PlayerInteractEntityC2SPacket.Handler() {
 			@Override
 			public void interact(Hand hand) {
@@ -103,6 +106,7 @@ public final class AutoWTap extends Module implements PacketSendListener, HudLis
 
 			@Override
 			public void attack() {
+				if (mc.player == null) return;
 				if (GLFW.glfwGetKey(mc.getWindow().getHandle(), GLFW.GLFW_KEY_SPACE) == 1 && !inAir.getValue()) {
 					jumpedWhileHitting = true;
 				}

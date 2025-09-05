@@ -56,7 +56,11 @@ public final class ClickGUI extends Module implements PacketReceiveListener {
 		Argon.INSTANCE.previousScreen = mc.currentScreen;
 
 		if (Argon.INSTANCE.clickGui != null) {
-			mc.setScreenAndRender(Argon.INSTANCE.clickGui);
+			mc.execute(() -> {
+				if (mc.player != null && mc.world != null) {
+					mc.setScreen(Argon.INSTANCE.clickGui);
+				}
+			});
 		} else if (mc.currentScreen instanceof InventoryScreen) {
 			Argon.INSTANCE.guiInitialized = true;
 		}
