@@ -81,7 +81,7 @@ public final class AutoCrystal extends Module implements TickListener, ItemUseLi
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null || mc.world == null || mc.interactionManager == null)
 			return;
 
 		boolean dontPlace = (placeClock != 0);
@@ -215,11 +215,13 @@ public final class AutoCrystal extends Module implements TickListener, ItemUseLi
 
 	@Override
 	public void onItemUse(ItemUseEvent event) {
-		if (mc.player.getMainHandStack().getItem() == Items.END_CRYSTAL) {
-			if ((mc.crosshairTarget instanceof BlockHitResult h
-					&& mc.crosshairTarget.getType() == HitResult.Type.BLOCK
-					&& (BlockUtils.isBlock(h.getBlockPos(), Blocks.OBSIDIAN) || BlockUtils.isBlock(h.getBlockPos(), Blocks.BEDROCK)))) {
-				event.cancel();
+		if (mc.player != null) {
+			if (mc.player.getMainHandStack().getItem() == Items.END_CRYSTAL) {
+				if ((mc.crosshairTarget instanceof BlockHitResult h
+						&& mc.crosshairTarget.getType() == HitResult.Type.BLOCK
+						&& (BlockUtils.isBlock(h.getBlockPos(), Blocks.OBSIDIAN) || BlockUtils.isBlock(h.getBlockPos(), Blocks.BEDROCK)))) {
+					event.cancel();
+				}
 			}
 		}
 	}
@@ -232,13 +234,13 @@ public final class AutoCrystal extends Module implements TickListener, ItemUseLi
 	}
 
 	private boolean damageTickCheck() {
-		return mc.world.getPlayers().parallelStream()
-				.filter(e -> e != mc.player)
-				.filter(e -> e.squaredDistanceTo(mc.player) < 36)
-				.filter(e -> e.getLastAttacker() == null)
-				.filter(e -> !e.isOnGround())
-				.anyMatch(e -> e.hurtTime >= 2)
+			return mc.world.getPlayers().parallelStream()
+					.filter(e -> e != mc.player)
+					.filter(e -> e.squaredDistanceTo(mc.player) < 36)
+					.filter(e -> e.getLastAttacker() == null)
+					.filter(e -> !e.isOnGround())
+					.anyMatch(e -> e.hurtTime >= 2)
 
-				&& !(mc.player.getAttacking() instanceof PlayerEntity);
-	}
+					&& !(mc.player.getAttacking() instanceof PlayerEntity);
+		}
 }

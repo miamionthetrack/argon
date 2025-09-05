@@ -7,6 +7,8 @@ import dev.lvstrng.argon.module.ModuleManager;
 import dev.lvstrng.argon.managers.ProfileManager;
 import dev.lvstrng.argon.utils.rotation.RotatorManager;
 import lombok.Getter;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 
@@ -14,7 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.*;
 
-public final class Argon {
+public final class Argon implements ClientModInitializer {
 	public RotatorManager rotatorManager;
 	@Getter
     public ProfileManager profileManager;
@@ -49,6 +51,15 @@ public final class Argon {
 
 		this.guiInitialized = false;
 		mc = MinecraftClient.getInstance();
+
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+			try {
+				if (INSTANCE != null && INSTANCE.getProfileManager() != null) {
+					INSTANCE.getProfileManager().saveProfile();
+				}
+			} catch (Exception ignored) {}
+		}, "???????????????????????"));
+
 	}
 
 	@SuppressWarnings("ResultOfMethodCallIgnored")
@@ -61,5 +72,10 @@ public final class Argon {
 			this.argonJar = new File(Argon.class.getProtectionDomain().getCodeSource().getLocation().toURI());
 			this.lastModified = argonJar.lastModified();
 		} catch (URISyntaxException ignored) {}
+	}
+
+	@Override
+	public void onInitializeClient() {
+		profileManager.loadProfile();
 	}
 }

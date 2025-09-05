@@ -115,4 +115,8 @@ public final class ModuleManager implements ButtonListener {
 			});
 		}
 	}
+
+	public List<Module> getAllModules() {
+		return new ArrayList<>(modules);
+	}
 }

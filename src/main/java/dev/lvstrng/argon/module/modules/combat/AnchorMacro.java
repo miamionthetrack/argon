@@ -5,7 +5,6 @@ import dev.lvstrng.argon.event.events.TickListener;
 import dev.lvstrng.argon.module.Category;
 import dev.lvstrng.argon.module.Module;
 import dev.lvstrng.argon.module.setting.BooleanSetting;
-import dev.lvstrng.argon.module.setting.KeybindSetting;
 import dev.lvstrng.argon.module.setting.NumberSetting;
 import dev.lvstrng.argon.utils.*;
 import net.minecraft.block.Blocks;
@@ -71,7 +70,7 @@ public final class AnchorMacro extends Module implements TickListener, ItemUseLi
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null)
 			return;
 
 		if (((mc.player.getMainHandStack().getItem().getComponents().contains(DataComponentTypes.FOOD) || mc.player.getMainHandStack().getItem() instanceof ShieldItem || mc.player.getOffHandStack().getItem() instanceof ShieldItem || mc.player.getOffHandStack().getItem().getComponents().contains(DataComponentTypes.FOOD)) && GLFW.glfwGetMouseButton(mc.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_RIGHT) == GLFW.GLFW_PRESS) && !whileUse.getValue())
@@ -172,7 +171,7 @@ public final class AnchorMacro extends Module implements TickListener, ItemUseLi
 
 	@Override
 	public void onItemUse(ItemUseEvent event) {
-		if (mc.crosshairTarget instanceof BlockHitResult hitResult && hitResult.getType() == HitResult.Type.BLOCK) {
+		if (mc.crosshairTarget instanceof BlockHitResult hitResult && hitResult.getType() == HitResult.Type.BLOCK && mc.player != null && mc.world != null) {
 			if (mc.player.getMainHandStack().getItem() == Items.RESPAWN_ANCHOR) {
 				Direction dir = hitResult.getSide();
 				BlockPos pos = hitResult.getBlockPos();

@@ -16,8 +16,8 @@
   "icon": "assets/immediatelyfast/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "dev.lvstrng.argon.Main"
+    "client": [
+      "dev.lvstrng.argon.Argon"
     ]
   },
   "mixins": [

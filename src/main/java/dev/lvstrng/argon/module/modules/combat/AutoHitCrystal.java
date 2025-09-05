@@ -70,7 +70,7 @@ public final class AutoHitCrystal extends Module implements TickListener, ItemUs
 	public void onTick() {
 		int randomNum = MathUtils.randomInt(1, 100);
 
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null || mc.interactionManager == null || mc.world == null)
 			return;
 
 		if (KeyUtils.isKeyPressed(activateKey.getKey())) {
@@ -166,6 +166,7 @@ public final class AutoHitCrystal extends Module implements TickListener, ItemUs
 
 	@Override
 	public void onItemUse(ItemUseEvent event) {
+		if (mc.player == null) return;
 		ItemStack mainHandStack = mc.player.getMainHandStack();
 		if ((mainHandStack.isOf(Items.END_CRYSTAL) || mainHandStack.isOf(Items.OBSIDIAN)) && GLFW.glfwGetMouseButton(mc.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_RIGHT) != GLFW.GLFW_PRESS)
 			event.cancel();

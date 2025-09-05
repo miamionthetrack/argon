@@ -36,6 +36,17 @@ public class MinecraftClientMixin {
 		}
 	}
 
+	@Inject(method = "stop", at = @At("HEAD"))
+	private void onClose(CallbackInfo ci) {
+		try {
+			if (Argon.INSTANCE != null && Argon.INSTANCE.getProfileManager() != null) {
+				Argon.INSTANCE.getProfileManager().saveProfile();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Inject(method = "onResolutionChanged", at = @At("HEAD"))
 	private void onResolutionChanged(CallbackInfo ci) {
 		EventManager.fire(new ResolutionListener.ResolutionEvent(this.window));
@@ -78,10 +89,5 @@ public class MinecraftClientMixin {
 			MouseSimulation.mouseButtons.put(GLFW.GLFW_MOUSE_BUTTON_1, false);
 			ci.cancel();
 		}
-	}
-
-	@Inject(method = "stop", at = @At("HEAD"))
-	private void onClose(CallbackInfo ci) {
-		Argon.INSTANCE.getProfileManager().saveProfile();
 	}
 }
