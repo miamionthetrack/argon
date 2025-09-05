@@ -1,7 +1,10 @@
 package dev.lvstrng.argon.module.setting;
 
+import lombok.Setter;
+
 public final class BooleanSetting extends Setting<BooleanSetting> {
-	private boolean value;
+	@Setter
+    private boolean value;
 	private final boolean originalValue;
 
 	public BooleanSetting(CharSequence name, boolean value) {
@@ -14,11 +17,7 @@ public final class BooleanSetting extends Setting<BooleanSetting> {
 		setValue(!value);
 	}
 
-	public void setValue(boolean value) {
-		this.value = value;
-	}
-
-	public boolean getOriginalValue() {
+    public boolean getOriginalValue() {
 		return originalValue;
 	}
 

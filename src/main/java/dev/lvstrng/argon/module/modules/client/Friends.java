@@ -34,7 +34,8 @@ public final class Friends extends Module implements ButtonListener, AttackListe
     private FriendManager manager;
 
     public Friends() {
-        super(EncryptedString.of("Friends"), EncryptedString.of("This module makes it so you can't do certain stuff if you have a player friended!"), -1, Category.CLIENT);
+        super(EncryptedString.of("Friends"),
+                EncryptedString.of("This module makes it so you can't do certain stuff if you have a player friended!"), -1, Category.CLIENT);
         addSettings(addFriendKey, antiAttack, disableAimAssist, friendStatus);
         setKey(-1);
     }
@@ -101,7 +102,11 @@ public final class Friends extends Module implements ButtonListener, AttackListe
 
             if(entity instanceof PlayerEntity player) {
                 if(manager.isFriend(player)) {
-                    TextRenderer.drawCenteredString(EncryptedString.of("Player is friend"), context, (mc.getWindow().getWidth() / 2), (mc.getWindow().getHeight() / 2) + 25, Color.GREEN.getRGB());
+                    TextRenderer.drawCenteredString(EncryptedString.of("Player is a friend"),
+                            context,
+                            (mc.getWindow().getWidth() / 2),
+                            (mc.getWindow().getHeight() / 2) + 25,
+                            Color.GREEN.getRGB());
                 }
             }
         }

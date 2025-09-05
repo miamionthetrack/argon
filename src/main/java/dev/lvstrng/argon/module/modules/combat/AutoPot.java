@@ -8,7 +8,6 @@ import dev.lvstrng.argon.module.setting.NumberSetting;
 import dev.lvstrng.argon.utils.EncryptedString;
 import dev.lvstrng.argon.utils.InventoryUtils;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.registry.Registries;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 
@@ -54,7 +53,7 @@ public final class AutoPot extends Module implements TickListener {
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null || mc.interactionManager == null)
 			return;
 
 		if ((mc.player.getHealth() <= minHealth.getValueFloat() || bool)) {

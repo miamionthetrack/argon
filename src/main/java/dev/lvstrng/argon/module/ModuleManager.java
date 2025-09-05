@@ -83,9 +83,9 @@ public final class ModuleManager implements ButtonListener {
 
 	public void addKeybinds() {
 		Argon.INSTANCE.getEventManager().add(ButtonListener.class, this);
-
 		for (Module module : modules)
-			module.addSetting(new KeybindSetting(EncryptedString.of("Keybind"), module.getKey(), true).setDescription(EncryptedString.of("Key to enabled the module")));
+			module.addSetting(new KeybindSetting(EncryptedString.of("Keybind"), module.getKey(), true)
+					.setDescription(EncryptedString.of("Key to enable the module")));
 	}
 
 	public List<Module> getModulesInCategory(Category category) {

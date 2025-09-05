@@ -182,7 +182,9 @@ public final class AutoHitCrystal extends Module implements TickListener, ItemUs
 
 	@Override
 	public void onAttack(AttackEvent event) {
-		if (mc.player.getMainHandStack().isOf(Items.END_CRYSTAL) && GLFW.glfwGetMouseButton(mc.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_LEFT) != GLFW.GLFW_PRESS)
-			event.cancel();
+		if (mc.player != null) {
+			if (mc.player.getMainHandStack().isOf(Items.END_CRYSTAL) && GLFW.glfwGetMouseButton(mc.getWindow().getHandle(), GLFW.GLFW_MOUSE_BUTTON_LEFT) != GLFW.GLFW_PRESS)
+				event.cancel();
+		}
 	}
 }

@@ -48,7 +48,7 @@ public final class AutoPotRefill extends Module implements TickListener {
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen instanceof InventoryScreen inventoryScreen) {
+		if (mc.currentScreen instanceof InventoryScreen inventoryScreen && mc.player != null && mc.interactionManager != null) {
 			if (mode.isMode(Mode.Hover)) {
 				Slot focusedSlot = ((HandledScreenMixin) inventoryScreen).getFocusedSlot();
 

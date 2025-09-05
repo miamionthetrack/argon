@@ -28,7 +28,7 @@ public final class NoJumpDelay extends Module implements TickListener {
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null)
 			return;
 
 		if (!mc.player.isOnGround())

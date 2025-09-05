@@ -22,7 +22,6 @@ public abstract class Setting<T extends Setting<T>> {
 
 	public T setDescription(CharSequence desc) {
 		this.description = desc;
-		//noinspection unchecked
 		return (T) this;
 	}
 }

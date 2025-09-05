@@ -41,6 +41,7 @@ public final class NoMissDelay extends Module implements AttackListener, BlockBr
 
 	@Override
 	public void onAttack(AttackEvent event) {
+		if (mc.player == null || mc.crosshairTarget == null) return;
 		if (onlyWeapon.getValue()
 				&& !(mc.player.getMainHandStack().getItem() instanceof SwordItem || mc.player.getMainHandStack().getItem() instanceof AxeItem))
 			return;
@@ -57,6 +58,7 @@ public final class NoMissDelay extends Module implements AttackListener, BlockBr
 
 	@Override
 	public void onBlockBreaking(BlockBreakingEvent event) {
+		if (mc.player == null || mc.crosshairTarget == null) return;
 		if (onlyWeapon.getValue()
 				&& !(mc.player.getMainHandStack().getItem() instanceof SwordItem || mc.player.getMainHandStack().getItem() instanceof AxeItem))
 			return;

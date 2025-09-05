@@ -57,7 +57,7 @@ public final class ShieldDisabler extends Module implements TickListener, Attack
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen != null)
+		if (mc.currentScreen != null || mc.player == null )
 			return;
 
 		if(requireHoldAxe.getValue() && !(mc.player.getMainHandStack().getItem() instanceof AxeItem))

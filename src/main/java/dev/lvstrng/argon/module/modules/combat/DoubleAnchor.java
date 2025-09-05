@@ -13,6 +13,8 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.Objects;
+
 public final class DoubleAnchor extends Module implements TickListener {
 	public DoubleAnchor() {
 		super(EncryptedString.of("Double Anchor"),
@@ -53,7 +55,7 @@ public final class DoubleAnchor extends Module implements TickListener {
 							count = 0;
 						}
 
-						mc.getNetworkHandler().sendPacket(new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, h, 0));
+						Objects.requireNonNull(mc.getNetworkHandler()).sendPacket(new PlayerInteractBlockC2SPacket(Hand.MAIN_HAND, h, 0));
 						count++;
 					}
 				}

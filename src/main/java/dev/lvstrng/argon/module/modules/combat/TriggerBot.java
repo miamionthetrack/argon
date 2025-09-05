@@ -17,7 +17,6 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -36,10 +35,6 @@ public final class TriggerBot extends Module implements TickListener, AttackList
 			.setDescription(EncryptedString.of("Delay for swords"));
 	private final MinMaxSetting axeDelay = new MinMaxSetting(EncryptedString.of("Axe Delay"), 0, 1000, 1, 780, 800)
 			.setDescription(EncryptedString.of("Delay for axes"));
-	/*private final NumberSetting swordDelay = new NumberSetting(EncryptedString.of("Sword Delay"), 0, 1000, 550, 1)
-			.setDescription(EncryptedString.of("Delay for swords"));*/
-	/*private final NumberSetting axeDelay = new NumberSetting(EncryptedString.of("Axe Delay"), 0, 1000, 800, 1)
-			.setDescription(EncryptedString.of("Delay for axes"));*/
 	private final BooleanSetting checkShield = new BooleanSetting(EncryptedString.of("Check Shield"), false)
 			.setDescription(EncryptedString.of("Checks if the player is blocking your hits with a shield (Recommended with Shield Disabler)"));
 	private final BooleanSetting onlyCritSword = new BooleanSetting(EncryptedString.of("Only Crit Sword"), false)
@@ -90,11 +85,11 @@ public final class TriggerBot extends Module implements TickListener, AttackList
 		super.onDisable();
 	}
 
-	@SuppressWarnings("all")
+
 	@Override
 	public void onTick() {
 		try {
-			if (!inScreen.getValue() && mc.currentScreen != null)
+			if (!inScreen.getValue() && mc.currentScreen != null || mc.player == null)
 				return;
 
 			if(Argon.INSTANCE.getModuleManager().getModule(Friends.class).antiAttack.getValue() && Argon.INSTANCE.getFriendManager().isAimingOverFriend())

@@ -12,7 +12,7 @@ public final class AnimationUtils {
 		this.originalValue = value;
 	}
 
-	public double animate(double delta, double end) {
+	public void animate(double delta, double end) {
 		this.endValue = end;
 		if (ClickGUI.animationMode.isMode(ClickGUI.AnimationMode.Normal)) {
 			value = MathUtils.goodLerp((float) delta, value, end);
@@ -22,7 +22,6 @@ public final class AnimationUtils {
 			value = end;
 		}
 
-		return value;
 	}
 
 	public double getValue() {

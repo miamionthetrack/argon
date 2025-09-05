@@ -1,10 +1,17 @@
 package dev.lvstrng.argon.module.setting;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public final class KeybindSetting extends Setting<KeybindSetting> {
 	private int keyCode;
-	private boolean listening;
-	private final boolean moduleKey;
-	private final int originalKey;
+	@Setter
+    @Getter
+    private boolean listening;
+	@Getter
+    private final boolean moduleKey;
+	@Getter
+    private final int originalKey;
 
 	public KeybindSetting(CharSequence name, int key, boolean moduleKey) {
 		super(name);
@@ -13,23 +20,7 @@ public final class KeybindSetting extends Setting<KeybindSetting> {
 		this.moduleKey = moduleKey;
 	}
 
-	public boolean isModuleKey() {
-		return moduleKey;
-	}
-
-	public boolean isListening() {
-		return listening;
-	}
-
-	public int getOriginalKey() {
-		return originalKey;
-	}
-
-	public void setListening(boolean listening) {
-		this.listening = listening;
-	}
-
-	public int getKey() {
+    public int getKey() {
 		return keyCode;
 	}
 

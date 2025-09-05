@@ -1,12 +1,15 @@
 package dev.lvstrng.argon.module.setting;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.List;
 
 public final class ModeSetting<T extends Enum<T>> extends Setting<ModeSetting<T>> {
 	public int index;
 	private final List<T> possibleValues;
-	private final int originalValue;
+	@Getter
+    private final int originalValue;
 
 	public ModeSetting(CharSequence name, T defaultValue, Class<T> type) {
 		super(name);
@@ -32,11 +35,7 @@ public final class ModeSetting<T extends Enum<T>> extends Setting<ModeSetting<T>
 		return index;
 	}
 
-	public int getOriginalValue() {
-		return originalValue;
-	}
-
-	public void cycle() {
+    public void cycle() {
 		if (index < possibleValues.size() - 1)
 			index++;
 		else index = 0;

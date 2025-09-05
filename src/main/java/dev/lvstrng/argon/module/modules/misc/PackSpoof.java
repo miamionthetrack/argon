@@ -29,7 +29,7 @@ public class PackSpoof extends Module implements PacketReceiveListener {
     public void onPacketReceive(PacketReceiveEvent event) {
         if(mc.getNetworkHandler() != null) {
             Packet<?> packet = event.packet;
-            if (packet instanceof ResourcePackSendS2CPacket) {
+            if (packet instanceof ResourcePackSendS2CPacket && mc.player != null) {
                 event.cancel();
 
                 mc.getNetworkHandler().sendPacket(new ResourcePackStatusC2SPacket(mc.player.getUuid(), ResourcePackStatusC2SPacket.Status.ACCEPTED));

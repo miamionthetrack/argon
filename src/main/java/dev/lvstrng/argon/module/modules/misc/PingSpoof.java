@@ -4,11 +4,11 @@ import dev.lvstrng.argon.event.events.PacketReceiveListener;
 import dev.lvstrng.argon.module.Category;
 import dev.lvstrng.argon.module.Module;
 import dev.lvstrng.argon.module.setting.MinMaxSetting;
-import dev.lvstrng.argon.module.setting.NumberSetting;
 import dev.lvstrng.argon.utils.EncryptedString;
-import dev.lvstrng.argon.utils.MathUtils;
 import net.minecraft.network.packet.c2s.common.KeepAliveC2SPacket;
 import net.minecraft.network.packet.s2c.common.KeepAliveS2CPacket;
+
+import java.util.Objects;
 
 public final class PingSpoof extends Module implements PacketReceiveListener {
 	private final MinMaxSetting ping = new MinMaxSetting(EncryptedString.of("Ping"), 0, 1000, 1, 0, 600)
@@ -41,7 +41,7 @@ public final class PingSpoof extends Module implements PacketReceiveListener {
 			new Thread(() -> {
 				try {
 					Thread.sleep(delay);
-					mc.getNetworkHandler().getConnection().send(new KeepAliveC2SPacket(packet.getId()));
+					Objects.requireNonNull(mc.getNetworkHandler()).getConnection().send(new KeepAliveC2SPacket(packet.getId()));
 					delay = ping.getRandomValueInt();
 				} catch (InterruptedException ignored) {}
 			}).start();

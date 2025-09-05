@@ -33,7 +33,7 @@ public final class AutoJumpReset extends Module implements TickListener {
 	@Override
 	public void onTick() {
 		if(MathUtils.randomInt(1, 100) <= chance.getValueInt()) {
-			if (mc.currentScreen != null)
+			if (mc.currentScreen != null || mc.player == null)
 				return;
 
 			if (mc.player.isUsingItem())

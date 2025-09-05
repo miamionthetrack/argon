@@ -2,12 +2,12 @@ package dev.lvstrng.argon.module.setting;
 
 public final class NumberSetting extends Setting<NumberSetting> {
 	
-	private double min;
+	private final double min;
 	
-	private double max;
+	private final double max;
 	private double value;
 	
-	private double increment;
+	private final double increment;
 	
 	private final double originalValue;
 
