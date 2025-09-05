@@ -79,7 +79,7 @@ public final class ModuleManager implements ButtonListener {
 
 	public List<Module> getModules() {
 		return modules;
-	}
+	} //didnt see this before making getAllModules
 
 	public void addKeybinds() {
 		Argon.INSTANCE.getEventManager().add(ButtonListener.class, this);
@@ -116,9 +116,5 @@ public final class ModuleManager implements ButtonListener {
 					module.toggle();
 			});
 		}
-	}
-
-	public List<Module> getAllModules() {
-		return new ArrayList<>(modules);
 	}
 }

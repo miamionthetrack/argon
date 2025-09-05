@@ -39,7 +39,7 @@ public final class ProfileManager {
 			}
 			JsonObject profile = gson.fromJson(Files.readString(path), JsonObject.class);
 
-			for (Module module : Argon.INSTANCE.getModuleManager().getAllModules()) {
+			for (Module module : Argon.INSTANCE.getModuleManager().getModules()) {
 				String moduleName = module.getClass().getSimpleName();
 				JsonObject moduleJson = profile.getAsJsonObject(moduleName);
 				if (moduleJson == null) continue;
@@ -80,7 +80,7 @@ public final class ProfileManager {
 			Files.createDirectories(folderPath);
 			JsonObject profile = new JsonObject();
 
-			for (Module module : Argon.INSTANCE.getModuleManager().getAllModules()) {
+			for (Module module : Argon.INSTANCE.getModuleManager().getModules()) {
 				String moduleName = module.getClass().getSimpleName();
 				JsonObject moduleJson = new JsonObject();
 				moduleJson.addProperty("enabled", module.isEnabled());
