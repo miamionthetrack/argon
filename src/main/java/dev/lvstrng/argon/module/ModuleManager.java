@@ -110,9 +110,18 @@ public final class ModuleManager implements ButtonListener {
 	public void onButtonPress(ButtonEvent event) {
 		if(!SelfDestruct.destruct) {
 			modules.forEach(module -> {
-				if(module.getKey() == event.button && event.action == GLFW.GLFW_PRESS)
-					module.toggle();
-			});
+				boolean isMinecraftKey = false;
+                for (KeyBinding mcBind : mc.options.allKeys) {
+                    if (mcBind.matchesKey(event.button, 0)) { 
+                        isMinecraftKey = true;
+                        break; //i dont even gotta explain this icl
+                    }
+                }
+                if (!isMinecraftKey) {
+                    module.toggle();
+                }
+            }
+        });
 		}
 	}
 
