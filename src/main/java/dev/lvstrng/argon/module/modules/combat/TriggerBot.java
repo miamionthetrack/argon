@@ -36,10 +36,6 @@ public final class TriggerBot extends Module implements TickListener, AttackList
 			.setDescription(EncryptedString.of("Delay for swords"));
 	private final MinMaxSetting axeDelay = new MinMaxSetting(EncryptedString.of("Axe Delay"), 0, 1000, 1, 780, 800)
 			.setDescription(EncryptedString.of("Delay for axes"));
-	/*private final NumberSetting swordDelay = new NumberSetting(EncryptedString.of("Sword Delay"), 0, 1000, 550, 1)
-			.setDescription(EncryptedString.of("Delay for swords"));*/
-	/*private final NumberSetting axeDelay = new NumberSetting(EncryptedString.of("Axe Delay"), 0, 1000, 800, 1)
-			.setDescription(EncryptedString.of("Delay for axes"));*/
 	private final BooleanSetting checkShield = new BooleanSetting(EncryptedString.of("Check Shield"), false)
 			.setDescription(EncryptedString.of("Checks if the player is blocking your hits with a shield (Recommended with Shield Disabler)"));
 	private final BooleanSetting onlyCritSword = new BooleanSetting(EncryptedString.of("Only Crit Sword"), false)
