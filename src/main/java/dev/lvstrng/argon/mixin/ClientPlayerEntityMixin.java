@@ -35,5 +35,4 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 	private void onPlayerTick(CallbackInfo ci) {
 		EventManager.fire(new PlayerTickListener.PlayerTickEvent());
 	}
-	//@Inject(method = "sendMovementPackets", at = @At("HEAD"))
 }
