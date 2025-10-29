@@ -29,19 +29,19 @@ public final class DoubleAnchor extends Module implements TickListener {
 		eventManager.add(TickListener.class, this);
 		pos = null;
 		count = 0;
-		super.onEnable();
+	
 	}
 
 	@Override
 	public void onDisable() {
 		eventManager.remove(TickListener.class, this);
-		super.onDisable();
+
 	}
 
 	@Override
 	public void onTick() {
-		if (mc.currentScreen == null) {
-			assert mc.player != null;
+		if (mc.currentScreen == null && mc.player != null) {
+
 			if (mc.player.getMainHandStack().isOf(Items.RESPAWN_ANCHOR)) {
 				assert mc.world != null;
 				if (mc.crosshairTarget instanceof BlockHitResult h && BlockUtils.isAnchorCharged(h.getBlockPos())) {
